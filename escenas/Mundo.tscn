@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://escenas/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://escenas/Mundo.gd" type="Script" id=2]
+[ext_resource path="res://escenas/Tarea.tscn" type="PackedScene" id=3]
+[ext_resource path="res://escenas/Interfaz.tscn" type="PackedScene" id=4]
+[ext_resource path="res://art/fondo.jpg" type="Texture" id=5]
+[ext_resource path="res://art/die.wav" type="AudioStream" id=6]
+[ext_resource path="res://art/la-guitarra.ogg" type="AudioStream" id=7]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0.144196, -0.257484, 0, 0, 0, 0, 639.72, 0.293007, 0, 0, 0, 0, 639.885, 960.138, 0, 0, 0, 0, 0.151699, 960.055, 0, 0, 0, 0, 0.144196, -0.257484 )
+}
+
+[node name="Mundo" type="Node"]
+script = ExtResource( 2 )
+Tarea = ExtResource( 3 )
+
+[node name="Fondo" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 640, 960 )
+rect_scale = Vector2( 0.38, 0.38 )
+texture = ExtResource( 5 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 319.931, 364.924 )
+
+[node name="TareaTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="InicioTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="PosicionInicio" type="Position2D" parent="."]
+position = Vector2( 321.507, 362.868 )
+
+[node name="Camino" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="EntradaTarea" type="PathFollow2D" parent="Camino"]
+position = Vector2( 0.144196, -0.257484 )
+rotation = 0.000860692
+
+[node name="Interfaz" parent="." instance=ExtResource( 4 )]
+
+[node name="SonidoLose" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="Musica" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+[connection signal="golpe" from="Player" to="." method="game_over"]
+[connection signal="timeout" from="TareaTimer" to="." method="_on_TareaTimer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
+[connection signal="timeout" from="InicioTimer" to="." method="_on_InicioTimer_timeout"]
+[connection signal="iniciar_juego" from="Interfaz" to="." method="nuevo_juego"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/la-guitarra.ogg-e98e93db5be1ce69da7be0c1447767b9.oggstr"
+
+[deps]
+
+source_file="res://art/la-guitarra.ogg"
+dest_files=[ "res://.import/la-guitarra.ogg-e98e93db5be1ce69da7be0c1447767b9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

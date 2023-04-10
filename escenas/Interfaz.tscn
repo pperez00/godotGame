@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fonts/Colleged.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://escenas/Interfaz.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 26
+font_data = ExtResource( 1 )
+
+[node name="Interfaz" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -199.666
+margin_top = -1.16635
+margin_right = 197.334
+margin_bottom = 94.8336
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mensaje" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -304.5
+margin_top = -69.0
+margin_right = 304.5
+margin_bottom = 69.0
+custom_fonts/font = SubResource( 2 )
+text = "¡Basta de TPsss!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.727
+anchor_right = 0.5
+anchor_bottom = 0.727
+margin_left = -108.0
+margin_top = -28.92
+margin_right = 108.0
+margin_bottom = 29.08
+custom_fonts/font = SubResource( 3 )
+text = "Jugar"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MensajeTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="timeout" from="MensajeTimer" to="." method="_on_MensajeTimer_timeout"]
